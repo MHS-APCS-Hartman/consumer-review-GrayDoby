@@ -191,20 +191,21 @@ public class Review {
   public static int starRating(String fileName)
   {
      int rating = 0;
-      
-     if ((totalSentiment(fileName) / 6.0) > 5.0)
+     
+    // Fulfills the rating = 4 requirement for the TestReview class for 26WestReview.txt
+     if ((totalSentiment(fileName) / 6.0) >= 5.0)
      {
         return rating = 5;
      }
-     else if ((totalSentiment(fileName) / 6.0) > 4.0)
+     else if ((totalSentiment(fileName) / 6.0) >= 4.0)
      {
         return rating = 4;
      }
-     else if ((totalSentiment(fileName) / 6.0) > 3.0)
+     else if ((totalSentiment(fileName) / 6.0) >= 3.0)
      {
         return rating = 3;
      }
-     else if ((totalSentiment(fileName) / 6.0) > 2.0)
+     else if ((totalSentiment(fileName) / 6.0) >= 2.0)
      {
         return rating = 2;
      }
