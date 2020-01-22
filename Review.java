@@ -214,4 +214,36 @@ public class Review {
         return rating = 1;
      }
   }
+  
+  public static String fakeReview(String fileName)
+  {
+    String toBeTested = textToString(fileName);
+    String placeholder = "";
+    boolean asteriskDetected = false;
+
+    for (int i = 0; i < toBeTested.length(); i++)
+    {
+      // Detects when an asterisk is present to mark the current word as an adjective.
+      if (toBeTested.substring(i, i+1).equals("*"))
+      {
+        asteriskDetected = true;
+      }
+
+      /* Spaces indicate when a word ends and if the asterisk is before the word ending, indicated by the asterisk detected
+      * boolean, it knows to replace that entire word with an adjective.
+      */
+      else if (toBeTested.substring(i, i+1).equals(" ") && asteriskDetected)
+      {
+        placeholder += randomAdjective() + " ";
+        asteriskDetected = false;
+      }
+
+      // There is no adjective (asterisk) present so the placeholder continues to add characters.
+      else if (asteriskDetected == false)
+      {
+        placeholder += toBeTested.substring(i, i+1);
+      }
+    }
+    return placeholder;
+  }
 }
