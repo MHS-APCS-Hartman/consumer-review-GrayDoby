@@ -246,4 +246,60 @@ public class Review {
     }
     return placeholder;
   }
+  
+  public static String fakeReviewStronger(String fileName)
+  {
+   String toBeTested = textToString(fileName);
+   String adjective = "";
+   String newAdjective = "";
+   String placeholder = "";
+   boolean asteriskDetected = false;
+   
+   for (int i = 0; i < toBeTested.length(); i++)
+   {
+      if (toBeTested.substring(i, i+1).equals("*"))
+      {
+         asteriskDetected = true;
+      }
+      
+      else if (toBeTested.substring(i, i+1).equals(" ") && asteriskDetected)
+      {
+         /* This while loop creates a new adjective, sees if it is more extreme than the adjective it is to replace, and if
+          * not then it recycles the process until it finds the stronger adjective.
+          */ 
+         while (true)
+         {
+            newAdjective = randomAdjective();
+            if ( (sentimentVal(adjective) > 0) && (sentimentVal(newAdjective) > sentimentVal(adjective)) )
+            {
+               break;
+            }
+            else if ( (sentimentVal(adjective) < 0) && (sentimentVal(newAdjective) < sentimentVal(adjective)) )
+            {
+               break;
+            }
+            else if (sentimentVal(adjective) == 0)
+            {
+               break;
+            }
+         }
+         
+         placeholder += newAdjective + " ";
+         asteriskDetected = false;
+         adjective = "";
+      }
+      
+      // This works because it only starts to add to the adjective String after it finds the asterisk.
+      else if (asteriskDetected == true)
+      {
+         adjective += toBeTested.substring(i, i+1);
+      }
+      
+      else if (asteriskDetected == false)
+      {
+         placeholder += toBeTested.substring(i, i+1);
+      }
+   }
+   return placeholder;
+  }
 }
