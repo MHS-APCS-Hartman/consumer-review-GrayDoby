@@ -264,7 +264,9 @@ public class Review {
       
       else if (toBeTested.substring(i, i+1).equals(" ") && asteriskDetected)
       {
-         /* This while loop creates a new adjective, sees if it is more extreme than the adjective it is to replace, and if
+         adjective = removePunctuation(adjective);
+        
+        /* This while loop creates a new adjective, sees if it is more extreme than the adjective it is to replace, and if
           * not then it recycles the process until it finds the stronger adjective.
           */ 
          while (true)
