@@ -234,8 +234,16 @@ public class Review {
       */
       else if (toBeTested.substring(i, i+1).equals(" ") && asteriskDetected)
       {
-        placeholder += randomAdjective() + " ";
-        asteriskDetected = false;
+        while (true)
+        {
+           String newAdjective = randomAdjective();
+           if (newAdjective.equals("") != true)
+           {
+              placeholder += newAdjective + " ";
+              asteriskDetected = false;
+              break;
+           }
+        }
       }
 
       // There is no adjective (asterisk) present so the placeholder continues to add characters.
@@ -272,17 +280,25 @@ public class Review {
          while (true)
          {
             newAdjective = randomAdjective();
-            if ( (sentimentVal(adjective) > 0) && (sentimentVal(newAdjective) > sentimentVal(adjective)) )
+            
+            // This if statement is meant to debug how "" would be returned sometimes.
+            if (newAdjective.equals("") != true)
             {
-               break;
-            }
-            else if ( (sentimentVal(adjective) < 0) && (sentimentVal(newAdjective) < sentimentVal(adjective)) )
-            {
-               break;
-            }
-            else if (sentimentVal(adjective) == 0)
-            {
-               break;
+               // If the original adjective is positive and the new adjective is more positive, the new adjective is returned.
+               if ( (sentimentVal(adjective) > 0) && (sentimentVal(newAdjective) > sentimentVal(adjective)) )
+               {
+                  break;
+               }
+               // If the original adjective is negative and the new adjective is more negative, the new adjective is returned.
+               else if ( (sentimentVal(adjective) < 0) && (sentimentVal(newAdjective) < sentimentVal(adjective)) )
+               {
+                  break;
+               }
+               // If the original adjective's sentiment is "0," then it does not matter what is returned.
+               else if (sentimentVal(adjective) == 0)
+               {
+                  break;
+               }
             }
          }
          
