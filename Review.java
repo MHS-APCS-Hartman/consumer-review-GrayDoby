@@ -219,6 +219,7 @@ public class Review {
   {
     String toBeTested = textToString(fileName);
     String placeholder = "";
+    String punctuation = ".,!?;:";
     boolean asteriskDetected = false;
 
     for (int i = 0; i < toBeTested.length(); i++)
@@ -239,7 +240,15 @@ public class Review {
            String newAdjective = randomAdjective();
            if (newAdjective.equals("") != true)
            {
-              placeholder += newAdjective + " ";
+              placeholder += newAdjective;
+              if (punctuation.indexOf(toBeTested.substring(i-1, i)) != -1)
+              {
+                  placeholder += toBeTested.substring(i-1, i) + " ";
+              }
+              else
+              {
+                  placeholder += " ";
+              }
               asteriskDetected = false;
               break;
            }
@@ -261,6 +270,7 @@ public class Review {
    String adjective = "";
    String newAdjective = "";
    String placeholder = "";
+   String punctuation = ".,!?;:";
    boolean asteriskDetected = false;
    
    for (int i = 0; i < toBeTested.length(); i++)
@@ -302,7 +312,15 @@ public class Review {
             }
          }
          
-         placeholder += newAdjective + " ";
+         placeholder += newAdjective;
+         if (punctuation.indexOf(toBeTested.substring(i-1, i)) != -1)
+           {
+               placeholder += toBeTested.substring(i-1, i) + " ";
+           }
+           else
+           {
+               placeholder += " ";
+           }
          asteriskDetected = false;
          adjective = "";
       }
